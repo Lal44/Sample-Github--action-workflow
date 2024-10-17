@@ -5,10 +5,12 @@ on:
         branches:
             - master
             - test
+    schedule:
+        - cron: "0 10 * * 2,4"        
     pull_request:
         branches:
             - master
-        types:
+        types: # manuall trigger job
             - closed
             - opened
     workflow_dispatch: # when to trigger pipeline 
@@ -33,6 +35,13 @@ jobs:
         steps:
             - name: "Running in workflow dispatch"
               run: echo "workflow dispatch running"
+
+    on-schedule: # job 3
+        if: github.event_name == 'schedule'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Running in schedule"
+              run: echo "schedule running"
 
     on-pull-request-open: # job 3
         if: github.event_name == 'pull_request' && github.event_name == 'open'

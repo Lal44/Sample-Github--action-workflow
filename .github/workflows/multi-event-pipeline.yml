@@ -1,0 +1,13 @@
+name: "multi event pipe line"
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    on-push:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Running on master push"
+              run: echo "running in master push"

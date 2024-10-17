@@ -8,6 +8,8 @@ on:
     pull_request:
         branches:
             - master
+        types:
+            - closed
     workflow_dispatch: # when to trigger pipeline 
 
 jobs:
@@ -30,3 +32,10 @@ jobs:
         steps:
             - name: "Running in workflow dispatch"
               run: echo "workflow dispatch running"
+
+    on-pull-request-closed:
+        if: github.event_name == 'closed'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "running closed"
+              run: echo "running closed"

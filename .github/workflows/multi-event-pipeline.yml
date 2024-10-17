@@ -34,9 +34,15 @@ jobs:
             - name: "Running in workflow dispatch"
               run: echo "workflow dispatch running"
 
+    on-pull-request-open: # job 3
+        if: github.event_name == 'pull_request' && github.event_name == 'open'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Running in open"
+              run: echo "open running"    
             
     on-pull-request-closed: # job 3
-        if: github.event_name == 'closed'
+        if: github.event_name == 'pull_request' && github.event_name == 'closed'
         runs-on: ubuntu-latest
         steps:
             - name: "Running in closed"
